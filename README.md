@@ -1,2 +1,1 @@
-# pcsc-ode
-PCSC - Ordinary Differential Equations
+# Ordinary Differential Equations - PCSC
