@@ -2,40 +2,63 @@ class Problem
   private int id;
   private Solver solver;
   private std::string output_method;
-  private double* function;
+  private T solution;
   
-  public void setSolver(double init_y, double init_t, double delta_t, int n, std::string method);
-  public void setFunction(double* function);
-  public double[] solve();
-  public std::string getOutputMethod();
+  public void solve();
 
-class Solver
+class ODE_Problem(Problem)
   private double init_y;
   private double init_t;
   private double delta_t;
   private int n;
-  private double[] y_steps;
+  private double* function;
+
+  private double[] solution;
+  public ODE_Problem(double init_y, double init_t, double delta_t, int n, double* function)
+  public void solve();
+
+class Solver
+  public double elapsed_time;
+  public virtual T solve();
+
+class DiscreteSolver(Solver)
   public virtual double[] solve();
 
-class ForwardEuler(Solver)
+class ForwardEuler(DiscreteSolver)
   public virtual double[] solve();
 
-class AdamBashforth(Solver)
+class AdamBashforth(DiscreteSolver)
   public virtual double[] solve();
 
-class BackwardEuler(Solver)
+class BackwardEuler(DiscreteSolver)
   public virtual double[] solve();
 
-class Runge-Kutta(Solver)
+class Runge-Kutta(DiscreteSolver)
   public virtual double[] solve();
 
-class Input
-  public Problem read_variables();
+class Reader
+  public virtual Problem read_problem();
   public double* read_function();
+  private double* parse_function(std::string function);
 
-class FunctionParser
-  public double* parse_function(std::string function);
+class ODE_Reader(Reader)
+  public virtual ODE_Problem read_problem();
 
+class Function(std::function)
+  public generateFunction(std::string  function_expression);
+
+class Block
+  protected std::string variable_name;
+
+class PolynomialBlock(Block)
+  protected std::string variable_name;
+  private double scalar;
+
+class LogBlock(Block)
+  protected std::string variable_name;
+
+class ExpBlock(Block)
+  protected std::string variable_name;
 class Output
   public Output(Problem& problem, std::string path);
   protected Problem& problem;
