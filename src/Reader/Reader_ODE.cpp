@@ -1,10 +1,10 @@
-#include "Reader_ODE.hh"
+#include "Reader/Reader_ODE.hh"
 /* -------------------------------------------------------------------------- */
 
-Problem_ODE Reader_ODE::read_ODE_problem(){
+Problem_ODE Reader_ODE::read_ODE_Problem(){
     double init_y, init_t, delta_t;
     int n;
-    std::cout << "Please enter initial conditions for the ODE problem\n"   
+    std::cout << "Please enter initial conditions for the ODE problem\n";
     std::cout << "Initial y:";
     std::cin >> init_y;
     std::cout << "\n";
@@ -28,8 +28,6 @@ Problem_ODE Reader_ODE::read_ODE_problem(){
     
     return Problem_ODE(init_y, init_t, delta_t, n, function);
 }
-
-
 
 /* --------------------------------------------------------------------------- */
 

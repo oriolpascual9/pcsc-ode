@@ -1,8 +1,10 @@
-#ifndef __PROBLEM__HH__
-#define __PROBLEM__HH__
+#ifndef __PROBLEM__ODE__HH__
+#define __PROBLEM__ODE__HH__
 
-#include<solver.hh>
-#include<string>
+#include <string>
+
+#include "Solver/Solver.hh"
+#include "Problem.hh"
 
 /* -------------------------------------------------------------------------- */
 
@@ -10,35 +12,32 @@
   * Documentation TODO
   */
 
-class Problem{
+class Problem_ODE : public Problem
+{
 
   /* ------------------------------------------------------------------------ */
   /* Methods                                                                  */
   /* ------------------------------------------------------------------------ */
 
 public:
-  Problem();
+    Problem_ODE();
+  Problem_ODE(double init_y, double init_t, double delta_t, int n, double* function);
   //! Documentation TODO
-  virtual void solve() = 0;
+  virtual void solve();
 
 
   /* ------------------------------------------------------------------------ */
   /* Members                                                                  */
   /* ------------------------------------------------------------------------ */
 
-protected:
-
-  //!Documentation TODO
-  int id;
-  //!Documentation TODO
-  //Solver solver;
-  //!Documentation TODO
-  //T solution;
-
 private:
-
-
+  double init_y;
+  double init_t;
+  double delta_t;
+  int n;
+  double* function;
+  
 };
 
 /* -------------------------------------------------------------------------- */
-#endif //__PROBLEM__HH__
+#endif

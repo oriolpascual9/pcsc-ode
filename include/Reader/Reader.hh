@@ -2,8 +2,14 @@
 #define __READER__HH__
 
 #include <string>
-#include "Problem/Problem.hh"
 #include <cassert>
+#include <iostream>
+#include <vector>
+#include <sstream>
+
+#include "Problem/Problem.hh"
+#include "Problem/Problem_ODE.hh"
+
 
 /* -------------------------------------------------------------------------- */
 
@@ -32,7 +38,7 @@ protected:
   double* create_function(std::vector<std::string> terms);
 
 private:
-  virtual Problem read_ODE_Problem() = 0; 
+  virtual Problem_ODE read_ODE_Problem() = 0;
   //! 
   int read_type_of_problem();
 

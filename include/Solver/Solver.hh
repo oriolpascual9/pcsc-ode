@@ -6,7 +6,6 @@ class Solver {
 public:
     Solver() {}
     virtual ~Solver() {}
-
     virtual T solve() = 0;
 };
 

@@ -2,6 +2,8 @@
 #define __READER_ODE__HH__
 
 /* -------------------------------------------------------------------------- */
+#include <iostream>
+
 #include "Reader.hh"
 
 /**
@@ -18,7 +20,7 @@ class Reader_ODE: public Reader
 private:
 
   //! Documentation TODO
-  Problem_ODE read_ODE_problem();
+  Problem_ODE read_ODE_Problem();
 
 };
 

@@ -1,17 +1,21 @@
-#include "Reader.hh"
+#include "Reader/Reader.hh"
+
 /* -------------------------------------------------------------------------- */
 
 Problem Reader::read_problem(){
     std::cout << "Welcome to the Solver";
     int type = read_type_of_problem();
-    Problem problem;
+    Problem_ODE problem;
     switch (type)
     {
     case 1:
-        problem = read_ODE_problem();
+        problem = read_ODE_Problem();
+
     default:
         break;
     }
+
+    // Can a daughter class can be returned as a parent class? What would be the correct way to do this?
 }
 
 int Reader::read_type_of_problem() {
@@ -43,7 +47,7 @@ double* Reader::read_function(){
         std::cout << "This is supposed to be the instructions\n";
     }
 
-    std::cout << "Introduce function: "
+    std::cout << "Introduce function: ";
     std::cin >> function;
 
     return parse_function(function);
@@ -55,8 +59,8 @@ double* Reader::read_function(){
 
 
 double* Reader::parse_function(std::string function){
-    // Replace spaces to make parsing easier
-    std::replace(function.begin(), function.end(), ' ', '');
+    // Eliminate white spaces
+    std::remove(function.begin(), function.end(), ' ');
 
     // Create a string stream from the equation
     std::istringstream iss(function);
@@ -77,13 +81,11 @@ double* Reader::parse_function(std::string function){
         }
     }
 
-    return create_function(terms)
+    return create_function(terms);
 }
 
 double* Reader::create_function(std::vector<std::string> terms) {
 
 }
-
-/* --------------------------------------------------------------------------- */
 
 
