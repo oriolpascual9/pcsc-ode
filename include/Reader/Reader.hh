@@ -31,6 +31,12 @@ public:
   Problem& read_problem();
   //! Documentation TODO
   Function read_function();
+  //! Documentation TODO
+  Function choose_parse_function();
+  //! Documentation TODO
+  Function parse_function_poly(const std::string& input);
+  //! Documentation TODO
+  Function parse_function_exp(const std::string& input)
 
 private:
   virtual Problem_ODE read_ODE_Problem() = 0;
