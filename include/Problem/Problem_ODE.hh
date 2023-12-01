@@ -5,6 +5,7 @@
 
 #include "Solver/Solver.hh"
 #include "Problem.hh"
+#include "Function/Function.h"
 
 /* -------------------------------------------------------------------------- */
 
@@ -21,9 +22,9 @@ class Problem_ODE : public Problem
 
 public:
     Problem_ODE();
-  Problem_ODE(double init_y, double init_t, double delta_t, int n, double* function);
-  //! Documentation TODO
-  virtual void solve();
+    Problem_ODE(double init_y, double init_t, double delta_t, int n, Function function);
+    //! Documentation TODO
+    virtual void solve();
 
 
   /* ------------------------------------------------------------------------ */
@@ -31,12 +32,11 @@ public:
   /* ------------------------------------------------------------------------ */
 
 private:
-  double init_y;
-  double init_t;
-  double delta_t;
-  int n;
-  double* function;
-  
+    double init_y;
+    double init_t;
+    double delta_t;
+    int n;
+    Function function;
 };
 
 /* -------------------------------------------------------------------------- */

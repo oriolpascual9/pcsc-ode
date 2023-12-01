@@ -9,13 +9,15 @@ void Function::addComponent(FunctionComponent component) {
 }
 
 DoubleFunction Function::toDoubleFunction() const {
-    DoubleFunction function;
+    FunctionComponent currentComponent = FunctionComponent();
     for (FunctionComponent component : components){
         for(char sign : operators) {
             if (sign == '+')
-                function = components[0].getFunction();
+                currentComponent = currentComponent.sum(component);
+            else
+                currentComponent = currentComponent.subtract(component);
         }
     }
 
-    return function;
+    return currentComponent.getFunction();
 }

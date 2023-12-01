@@ -1,10 +1,5 @@
 #include "Reader/Reader.hh"
-#include "FunctionComponent/FunctionComponent.hh"
-#include "ExceptionHandler.h"
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <regex>
+
 /* -------------------------------------------------------------------------- */
 
 Problem& Reader::read_problem(){

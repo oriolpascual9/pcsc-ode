@@ -16,7 +16,8 @@ public:
     void generateTermComponent(double scalar, double exponent);
     void generateExpComponent(double base);
     DoubleFunction getFunction() const;
-    DoubleFunction sum(const FunctionComponent &other) const;
+    FunctionComponent sum(const FunctionComponent &other) const;
+    FunctionComponent subtract(const FunctionComponent &other) const;
 };
 
 

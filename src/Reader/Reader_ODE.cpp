@@ -23,7 +23,7 @@ Problem_ODE Reader_ODE::read_ODE_Problem(){
 
     // assert if there are some restrictions to the variables
     
-    double* function;
+    Function function;
     function = read_function();
     
     return Problem_ODE(init_y, init_t, delta_t, n, function);

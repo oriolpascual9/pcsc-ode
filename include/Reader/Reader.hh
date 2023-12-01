@@ -6,12 +6,13 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <regex>
 
 #include "Problem/Problem.hh"
 #include "Problem/Problem_ODE.hh"
 #include "Function/Function.h"
 #include "FunctionComponent/FunctionComponent.h"
-
+#include "ErrorHandler/ExceptionHandler.h"
 
 /* -------------------------------------------------------------------------- */
 
@@ -36,7 +37,7 @@ public:
   //! Documentation TODO
   Function parse_function_poly(const std::string& input);
   //! Documentation TODO
-  Function parse_function_exp(const std::string& input)
+  Function parse_function_exp(const std::string& input);
 
 private:
   virtual Problem_ODE read_ODE_Problem() = 0;

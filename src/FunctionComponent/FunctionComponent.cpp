@@ -24,14 +24,33 @@ DoubleFunction FunctionComponent::getFunction() const {
     return functionComponent;
 }
 
-DoubleFunction FunctionComponent::sum(const FunctionComponent &other) const {
-  DoubleFunction result;
+FunctionComponent FunctionComponent::sum(const FunctionComponent &other) const {
+  DoubleFunction f;
   DoubleFunction f1 = this->functionComponent;
   DoubleFunction f2 = other.functionComponent;
 
-  result = [f1, f2](double t, double y) {
+  f = [f1, f2](double t, double y) {
     return f1(t, y) + f2(t, y);
   };
-  
+
+  FunctionComponent result = FunctionComponent();
+  result.functionComponent = f;
+
   return result;
 }
+
+FunctionComponent FunctionComponent::subtract(const FunctionComponent &other) const {
+    DoubleFunction f;
+    DoubleFunction f1 = this->functionComponent;
+    DoubleFunction f2 = other.functionComponent;
+
+    f = [f1, f2](double t, double y) {
+        return f1(t, y) - f2(t, y);
+    };
+
+    FunctionComponent result = FunctionComponent();
+    result.functionComponent = f;
+
+    return result;
+}
+
