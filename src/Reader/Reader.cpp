@@ -2,20 +2,15 @@
 
 /* -------------------------------------------------------------------------- */
 
-Problem Reader::read_problem(){
+Problem& Reader::read_problem(){
     std::cout << "Welcome to the Solver";
     int type = read_type_of_problem();
-    Problem_ODE problem;
     switch (type)
     {
     case 1:
-        problem = read_ODE_Problem();
-
-    default:
-        break;
+        Problem_ODE problem = read_ODE_Problem();
+        return problem;
     }
-
-    // Can a daughter class can be returned as a parent class? What would be the correct way to do this?
 }
 
 int Reader::read_type_of_problem() {
@@ -32,13 +27,11 @@ int Reader::read_type_of_problem() {
     return type;
 }
 
-
-
 /* --------------------------------------------------------------------------- */
 
-double* Reader::read_function(){
+Function Reader::read_function(){
     char instructions;
-    std::string function;
+    std::string functionStr;
     std::cout << "Now introduce the function, do you want to know the instructions? (y/n)";
     std::cin >> instructions;
 
@@ -47,45 +40,11 @@ double* Reader::read_function(){
         std::cout << "This is supposed to be the instructions\n";
     }
 
-    std::cout << "Introduce function: ";
-    std::cin >> function;
+    // TODO: Readin function method
+    // TODO: Read Function Component one by one and append them to Function class
 
-    return parse_function(function);
+    Function function;
+    return function;
 }
-
-
 
 /* --------------------------------------------------------------------------- */
-
-
-double* Reader::parse_function(std::string function){
-    // Eliminate white spaces
-    std::remove(function.begin(), function.end(), ' ');
-
-    // Create a string stream from the equation
-    std::istringstream iss(function);
-
-    // Vector to store the split terms
-    std::vector<std::string> terms;
-
-    // Temporary variable to store each term
-    std::string term;
-
-    // Loop to extract terms
-    while (std::getline(iss, term, '+')) {
-        // Split by '-' within the term
-        std::istringstream termStream(term);
-        std::string subTerm;
-        while (std::getline(termStream, subTerm, '-')) {
-            terms.push_back(subTerm);
-        }
-    }
-
-    return create_function(terms);
-}
-
-double* Reader::create_function(std::vector<std::string> terms) {
-
-}
-
-

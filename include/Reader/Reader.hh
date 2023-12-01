@@ -9,6 +9,8 @@
 
 #include "Problem/Problem.hh"
 #include "Problem/Problem_ODE.hh"
+#include "Function/Function.h"
+#include "FunctionComponent/FunctionComponent.h"
 
 
 /* -------------------------------------------------------------------------- */
@@ -26,16 +28,9 @@ class Reader{
 public:
 
   //! Documentation TODO
-  Problem read_problem();
+  Problem& read_problem();
   //! Documentation TODO
-  double* read_function();
-
-protected:
-
-  //! Documentation TODO
-  double* parse_function(std::string function);
-
-  double* create_function(std::vector<std::string> terms);
+  Function read_function();
 
 private:
   virtual Problem_ODE read_ODE_Problem() = 0;

@@ -5,11 +5,11 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Docs only available if this is the main app
 find_package(Doxygen)
-if(Doxygen_FOUND)
-    add_subdirectory(docs)
-else()
-    message(STATUS "Doxygen not found, not building docs")
-endif()
+#if(Doxygen_FOUND)
+#    add_subdirectory(docs)
+#else()
+#    message(STATUS "Doxygen not found, not building docs")
+#endif()
 
 # include the 'src' and 'include' directories
 add_subdirectory(src)
