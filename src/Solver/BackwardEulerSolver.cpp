@@ -1,19 +1,49 @@
 #include "Solver/BackwardEulerSolver.h"
+#include <utility> // for std::pair
+#include <vector>
 
-double* BackwardEulerSolver::solve() const {
-    double y = this->y0;
-    double t = 0;
-
-    for (int i = 0; i < this->n; ++i) {
-        y = solveBackwardEulerEquation(y, t, this->dt, this->f);
-        t += this->dt;
-    }
-
-    return y;
+std::pair<std::vector<double>, std::vector<double>> BackwardEulerSolver::solve() const {
+  std::vector<double> ys(this->n);
+  std::vector<double> ts(this->n);
+  double y = this->y0;
+  double t = 0;
+  
+  for (int i = 0; i < this->n; ++i) {
+    y = solveBackwardEulerEquation(y, t, this->dt, this->f);
+    t += this->dt;
+    
+    ys[i] = y; // Store the updated y-value
+    ts[i] = t; // Store the updated time
+  }
+  
+  return std::make_pair(ts, ys);
 }
 
-double BackwardEulerSolver::solveBackwardEulerEquation(double y, double t, double dt, double (*f)(double, double)) const{
-    // Implementation of the backward Euler equation solver
-    // Placeholder implementation:
-    return y;
+double BackwardEulerSolver::solveBackwardEulerEquation(double y, double t, double dt, double (*f)(double, double)) const {
+  const double tolerance = 1e-6;
+  const int maxIterations = 100;
+  double y_next = y; // Initial guess for y_next
+  
+  for (int i = 0; i < maxIterations; ++i) {
+    // Newton's method formula
+    double g = y_next - y - dt * f(t + dt, y_next);
+    double g_prime = 1 - dt * derivativeOf_f_withRespectTo_y(t + dt, y_next);
+    
+    // Avoid division by zero
+    if (fabs(g_prime) < 1e-12) {
+      break;
+    }
+    
+    double y_next_new = y_next - g / g_prime;
+    
+    // Check for convergence
+    if (fabs(y_next_new - y_next) < tolerance) {
+      return y_next_new;
+    }
+    
+    y_next = y_next_new;
+  }
+  
+  // Return the best approximation after maxIterations
+  return y_next;
 }
