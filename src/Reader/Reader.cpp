@@ -1,5 +1,6 @@
 #include "Reader/Reader.hh"
 #include "FunctionComponent/FunctionComponent.hh"
+#include "ExceptionHandler.h"
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -33,27 +34,40 @@ int Reader::read_type_of_problem() {
 
 /* --------------------------------------------------------------------------- */
 
-
-
-Function Reader::read_function() {
-  char instructions;
+Function Reader::choose_parse_function() {
+  Function function;
+  std::string functionType;
   std::string functionStr;
+  char continueParsing = 'y';
   
-  std::cout << "Now introduce the function, do you want to know the instructions? (y/n): ";
-  std::cin >> instructions;
-  
-  if (instructions == 'y' || instructions == 'Y') {
-    std::cout << "Instructions:\n";
-    std::cout << "Enter the function in the format: a*x^b + c*x^d + ...\n";
-    std::cout << "For example, '3*x^2 - 1.5*x + 4'\n";
+  while (continueParsing == 'y' || continueParsing == 'Y') {
+    std::cout << "Enter the type of function component (poly/exp): ";
+    std::cin >> functionType;
+    
+    std::cout << "Enter the function component: ";
+    std::cin.ignore(); // Ignore leftover newline from previous input
+    std::getline(std::cin, functionStr);
+    
+    if (functionType == "poly") {
+      Function polyComponent = parse_function_poly(functionStr);
+      // Logic to combine `polyComponent` with `function`
+      // This depends on how you want to combine functions
+    } else if (functionType == "exp") {
+      Function expComponent = parse_function_exp(functionStr);
+      // Logic to combine `expComponent` with `function`
+      // This depends on how you want to combine functions
+    } else {
+      std::cerr << "Error: Unrecognized function type '" << functionType << "'\n";
+      // Optionally, continue to next iteration or break the loop
+    }
+    
+    std::cout << "Do you want to add another component? (y/n): ";
+    std::cin >> continueParsing;
   }
   
-  std::cout << "Enter your function: ";
-  std::cin.ignore(); // Ignore leftover newline from previous input
-  std::getline(std::cin, functionStr);
-  
-  return parse_function(functionStr);
+  return function;
 }
+
 
 Function Reader::parse_function_poly(const std::string& input) {
   Function function;
@@ -93,4 +107,34 @@ Function Reader::parse_function_poly(const std::string& input) {
   return function;
 }
 
+Function Reader::parse_function_exp(const std::string& input) {
+  Function function;
+  std::istringstream iss(input);
+  std::string token;
+  
+  // Regular expression for matching exponential terms like "2.5^y"
+  std::regex expPattern(R"(([-+]?[0-9]*\.?[0-9]+)\^y)");
+  
+  while (iss >> token) {
+    if (token == "+" || token == "-" || token == "*" || token == "/") {
+      function.addOperator(token[0]);
+    } else {
+      FunctionComponent component;
+      std::smatch matches;
+      
+      if (std::regex_match(token, matches, expPattern) && matches.size() == 2) {
+        double base = std::stod(matches[1]);
+        // Assuming generateExpComponent creates an exponential component of type base^y
+        component.generateExpComponent(base);
+      } else {
+        // Handle other types of components or throw an error
+        std::cerr << "Error: Unrecognized component format '" << token << "'\n";
+      }
+      
+      function.addComponent(component);
+    }
+  }
+  
+  return function;
+}
 /* --------------------------------------------------------------------------- */
