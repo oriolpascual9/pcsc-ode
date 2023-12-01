@@ -7,10 +7,10 @@
 
 class BackwardEulerSolver : public DiscreteSolver {
 public:
-    virtual std::pair<std::vector<double>, std::vector<double>> solve() const override;
+    virtual std::pair<std::vector<double>, std::vector<double>> solve() override;
 
 protected:
-    double solveBackwardEulerEquation(double y, double t, double dt, double (*f)(double, double)) const;
+    double solveBackwardEulerEquation(double y, double t, double dt, DoubleFunction function) const;
 };
 
 #endif //PCSC_ODE_BACKWARDEULER_H

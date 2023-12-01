@@ -4,16 +4,17 @@
 #include <vector>
 #include <utility>  // For std::pair
 #include "./Solver.hh"  // Ensure this path is correct
+#include "Function/Function.h"
 
 class DiscreteSolver : public Solver<std::pair<std::vector<double>, std::vector<double>>> {
 public:
-    DiscreteSolver(double (*function)(double, double), double initialY, double deltaTime, int steps)
-        : f(function), y0(initialY), dt(deltaTime), n(steps) {}
+    DiscreteSolver(Function function, double initialY, double deltaTime, int steps)
+        : function(function), y0(initialY), dt(deltaTime), n(steps) {}
 
-    virtual std::pair<std::vector<double>, std::vector<double>> solve() const override = 0;
+    virtual std::pair<std::vector<double>, std::vector<double>> solve() override = 0;
 
 protected:
-    double (*f)(double, double);
+    Function function;
     double y0;
     double dt;
     int n;

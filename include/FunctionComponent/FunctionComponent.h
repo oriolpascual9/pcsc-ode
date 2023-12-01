@@ -4,7 +4,7 @@
 #include <cmath>
 #include <functional>
 
-using DoubleFunction = std::function<double(double*, double*)>;
+using DoubleFunction = std::function<double(double, double)>;
 
 class FunctionComponent {
 private:
@@ -15,7 +15,8 @@ public:
     void generateScalarComponent(double scalar);
     void generateTermComponent(double scalar, double exponent);
     void generateExpComponent(double base);
-    DoubleFunction getFunction();
+    DoubleFunction getFunction() const;
+    DoubleFunction sum(const FunctionComponent &other) const;
 };
 
 

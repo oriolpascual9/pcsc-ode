@@ -14,7 +14,7 @@ public:
     Function(){};
     void addOperator(char sign);
     void addComponent(FunctionComponent component);
-    DoubleFunction toDoubleFunction();
+    DoubleFunction toDoubleFunction() const;
 
 };
 

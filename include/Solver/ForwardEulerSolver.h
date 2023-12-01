@@ -4,10 +4,11 @@
 #include "DiscreteSolver.hh"
 #include <vector>
 #include <utility> // For std::pair
+#include <functional>
 
 class ForwardEulerSolver : public DiscreteSolver {
 public:
-    virtual std::pair<std::vector<double>, std::vector<double>> solve() const override;
+    std::pair<std::vector<double>, std::vector<double>> solve() override;
 };
 
 #endif //PCSC_ODE_FORWARDEULERSOLVER_H
