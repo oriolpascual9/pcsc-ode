@@ -7,7 +7,7 @@
 
 class AdamBashforthSolver : public DiscreteSolver {
 public:
-    virtual std::pair<std::vector<double>, std::vector<double>> solve() const override;
+    virtual std::pair<std::vector<double>, std::vector<double>> solve() override;
 };
 
 #endif
