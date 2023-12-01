@@ -2,18 +2,17 @@
 #define PCSC_ODE_ADAMBASHFORTHSOLVER_H
 
 #include <functional>
-
+#include <vector>
 #include "DiscreteSolver.hh"
 
-class AdamBashforthSolver : public DiscreteSolver {
+class AdamBashforthSolver : public DiscreteSolver<double> {
 public:
-    AdamBashforthSolver(double (*function)(double, double), double initialY, double deltaTime, int steps, std::function<double(DiscreteSolver<double>&)> initialMethod)
-            : DiscreteSolver<double>(function, initialY, deltaTime, steps), initialMethod(initialMethod) {}
+    // Constructor without initialMethod
+    AdamBashforthSolver(double (*function)(double, double), double initialY, double deltaTime, int steps)
+        : DiscreteSolver<double>(function, initialY, deltaTime, steps) {}
 
-    virtual double* solve() const override;
-
-private:
-    std::function<T(DiscreteSolver<double[]>&)> initialMethod;
+    virtual std::pair<std::vector<double>, std::vector<double>> solve() const override;
 };
 
 #endif
+
