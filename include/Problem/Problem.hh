@@ -2,6 +2,7 @@
 #define __PROBLEM__HH__
 
 #include "Solver/Solver.hh"
+#include "Solver/DiscreteSolver.hh"
 #include <string>
 
 /* -------------------------------------------------------------------------- */
@@ -19,7 +20,7 @@ class Problem{
 public:
   Problem();
   //! Documentation TODO
-  virtual void solve() = 0;
+  virtual void solve(DiscreteSolver& solver) = 0;
 
 
   /* ------------------------------------------------------------------------ */
@@ -29,13 +30,6 @@ public:
 protected:
   //!Documentation TODO
   std::string id;
-  //!Documentation TODO
-  //Solver solver;
-  //!Documentation TODO
-  //T solution;
-
-private:
-
 
 };
 

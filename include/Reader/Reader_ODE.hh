@@ -3,7 +3,6 @@
 
 /* -------------------------------------------------------------------------- */
 #include <iostream>
-
 #include "Reader.hh"
 
 /**
@@ -12,15 +11,10 @@
 
 class Reader_ODE: public Reader
 {
-
-  /* ------------------------------------------------------------------------ */
-  /* Methods                                                                  */
-  /* ------------------------------------------------------------------------ */
-
-private:
+public:
 
   //! Documentation TODO
-  Problem_ODE read_ODE_Problem();
+  Problem_ODE read_ODE_Problem() override;
 
 };
 

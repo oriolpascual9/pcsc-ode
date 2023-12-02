@@ -20,28 +20,30 @@
   * Documentation TODO
   */
 
-class Reader{
+class Reader
+{
 
   /* ------------------------------------------------------------------------ */
   /* Methods                                                                  */
   /* ------------------------------------------------------------------------ */
 
 public:
-
+  Reader();
   //! Documentation TODO
   Problem& read_problem();
   //! Documentation TODO
   Function read_function();
   //! Documentation TODO
-  Function choose_parse_function();
+  static Function choose_parse_function();
   //! Documentation TODO
-  Function parse_function_poly(const std::string& input);
+  static Function parse_function_poly(const std::string& input);
   //! Documentation TODO
-  Function parse_function_exp(const std::string& input);
+  static Function parse_function_exp(const std::string& input);
+
+protected:
+  virtual Problem_ODE read_ODE_Problem() = 0;
 
 private:
-  virtual Problem_ODE read_ODE_Problem() = 0;
-  //! 
   int read_type_of_problem();
 
 };

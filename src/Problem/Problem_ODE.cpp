@@ -9,7 +9,12 @@ Problem_ODE::Problem_ODE(double init_y, double init_t, double delta_t, int n, Fu
     this->function = function;
 }
 
-void Problem_ODE::solve()
+void Problem_ODE::solve(DiscreteSolver& solver)
 {
+    solver.setFunction(function);
+    solver.setDeltaT(delta_t);
+    solver.setInitialY(init_y);
+    solver.setN(n);
+    solution = solver.solve();
 }
 /* --------------------------------------------------------------------------- */

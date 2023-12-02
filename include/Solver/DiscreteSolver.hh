@@ -11,7 +11,14 @@ public:
     DiscreteSolver(Function function, double initialY, double deltaTime, int steps)
         : function(function), y0(initialY), dt(deltaTime), n(steps) {}
 
+    DiscreteSolver() {}
+
     virtual std::pair<std::vector<double>, std::vector<double>> solve() override = 0;
+
+    void setFunction(Function function);
+    void setInitialY(double y);
+    void setDeltaT(double dt);
+    void setN(int n);
 
 protected:
     Function function;

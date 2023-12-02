@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Solver/Solver.hh"
+#include "Solver/DiscreteSolver.hh"
 #include "Problem.hh"
 #include "Function/Function.h"
 
@@ -24,7 +24,7 @@ public:
     Problem_ODE();
     Problem_ODE(double init_y, double init_t, double delta_t, int n, Function function);
     //! Documentation TODO
-    virtual void solve();
+    void solve(DiscreteSolver& solver) override;
 
 
   /* ------------------------------------------------------------------------ */
@@ -37,6 +37,7 @@ private:
     double delta_t;
     int n;
     Function function;
+    std::pair<std::vector<double>, std::vector<double>> solution;
 };
 
 /* -------------------------------------------------------------------------- */

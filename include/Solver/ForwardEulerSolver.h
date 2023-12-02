@@ -8,6 +8,7 @@
 
 class ForwardEulerSolver : public DiscreteSolver {
 public:
+    ForwardEulerSolver() {}
     std::pair<std::vector<double>, std::vector<double>> solve() override;
 };
 

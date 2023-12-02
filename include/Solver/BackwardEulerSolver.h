@@ -7,7 +7,8 @@
 
 class BackwardEulerSolver : public DiscreteSolver {
 public:
-    virtual std::pair<std::vector<double>, std::vector<double>> solve() override;
+    BackwardEulerSolver() {}
+    std::pair<std::vector<double>, std::vector<double>> solve() override;
 
 protected:
     double solveBackwardEulerEquation(double y, double t, double dt, DoubleFunction function) const;
