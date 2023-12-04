@@ -36,9 +36,9 @@ public:
   //! Documentation TODO
   static Function choose_parse_function();
   //! Documentation TODO
-  static Function parse_function_poly(const std::string& input);
+  static void parse_function_poly(Function& function, const std::string& input);
   //! Documentation TODO
-  static Function parse_function_exp(const std::string& input);
+  static void parse_function_exp(Function& function, const std::string& input);
 
 protected:
   virtual Problem_ODE read_ODE_Problem() = 0;

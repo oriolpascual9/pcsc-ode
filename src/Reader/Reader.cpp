@@ -30,42 +30,41 @@ int Reader::read_type_of_problem() {
 /* --------------------------------------------------------------------------- */
 
 Function Reader::choose_parse_function() {
-  Function function;
-  std::string functionType;
-  std::string functionStr;
-  char continueParsing = 'y';
-  
-  while (continueParsing == 'y' || continueParsing == 'Y') {
-    std::cout << "Enter the type of function component (poly/exp): ";
-    std::cin >> functionType;
-    
-    std::cout << "Enter the function component: ";
-    std::cin.ignore(); // Ignore leftover newline from previous input
-    std::getline(std::cin, functionStr);
-    
-    if (functionType == "poly") {
-      Function polyComponent = parse_function_poly(functionStr);
-      // Logic to combine `polyComponent` with `function`
-      // This depends on how you want to combine functions
-    } else if (functionType == "exp") {
-      Function expComponent = parse_function_exp(functionStr);
-      // Logic to combine `expComponent` with `function`
-      // This depends on how you want to combine functions
-    } else {
-      std::cerr << "Error: Unrecognized function type '" << functionType << "'\n";
-      // Optionally, continue to next iteration or break the loop
+    Function function;
+    std::string functionType;
+    std::string functionStr;
+    char continueParsing = 'y';
+
+    while (continueParsing == 'y' || continueParsing == 'Y') {
+        std::cout << "Enter the type of function component (poly/exp): ";
+        std::cin >> functionType;
+
+        std::cout << "Enter the function component: ";
+        std::cin.ignore(); // Ignore leftover newline from previous input
+        std::getline(std::cin, functionStr);
+
+        try {
+            if (functionType == "poly") {
+                parse_function_poly(function, functionStr);
+            } else if (functionType == "exp") {
+                parse_function_exp(function, functionStr);
+            } else {
+                throw Exception("Error: Unrecognized function type '" + functionType + "'");
+            }
+        } catch (const Exception& e) {
+            std::cerr << "Exception caught: " << e.what() << '\n';
+            break;
+        }
+
+        std::cout << "Do you want to add another component? (y/n): ";
+        std::cin >> continueParsing;
     }
-    
-    std::cout << "Do you want to add another component? (y/n): ";
-    std::cin >> continueParsing;
-  }
-  
-  return function;
+
+    return function;
 }
 
 
-Function Reader::parse_function_poly(const std::string& input) {
-  Function function;
+void Reader::parse_function_poly(Function& function, const std::string& input) {
   std::istringstream iss(input);
   std::string token;
   
@@ -90,20 +89,18 @@ Function Reader::parse_function_poly(const std::string& input) {
           double exponent = std::stod(matches[2]);
           component.generateTermComponent(scalar, exponent);
         } else {
-          // Handle other types of components or throw an error
-          std::cerr << "Error: Unrecognized component format '" << token << "'\n";
+            if (!std::regex_match(token, matches, termPattern) || matches.size() != 3) {
+                throw Exception("Error: Unrecognized component format '" + token + "'");
+            }
         }
       }
       
       function.addComponent(component);
     }
   }
-  
-  return function;
 }
 
-Function Reader::parse_function_exp(const std::string& input) {
-  Function function;
+void Reader::parse_function_exp(Function& function, const std::string& input) {
   std::istringstream iss(input);
   std::string token;
   
@@ -122,14 +119,13 @@ Function Reader::parse_function_exp(const std::string& input) {
         // Assuming generateExpComponent creates an exponential component of type base^y
         component.generateExpComponent(base);
       } else {
-        // Handle other types of components or throw an error
-        std::cerr << "Error: Unrecognized component format '" << token << "'\n";
+          if (!std::regex_match(token, matches, expPattern) || matches.size() != 2) {
+              throw Exception("Error: Unrecognized component format '" + token + "'");
+          }
       }
       
       function.addComponent(component);
     }
   }
-  
-  return function;
 }
 /* --------------------------------------------------------------------------- */
