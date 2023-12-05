@@ -21,30 +21,31 @@ std::pair<std::vector<double>, std::vector<double>> BackwardEulerSolver::solve()
 }
 
 double BackwardEulerSolver::solveBackwardEulerEquation(double y, double t, double dt, DoubleFunction f) const {
-  const double tolerance = 1e-6;
-  const int maxIterations = 100;
-  double y_next = y; // Initial guess for y_next
-  
-  for (int i = 0; i < maxIterations; ++i) {
-    // Newton's method formula
-    double g = y_next - y - dt * f(t + dt, y_next);
-    double g_prime = 1 - (f(t + dt, y_next) - f(t, y))/2;
-    
-    // Avoid division by zero
-    if (fabs(g_prime) < 1e-12) {
-      break;
+    const double tolerance = 1e-6;
+    const int maxIterations = 100;
+    double y_next = y; // Initial guess for y_next
+
+    for (int i = 0; i < maxIterations; ++i) {
+        // Newton's method formula
+        double g = y_next - y - dt * f(t + dt, y_next);
+        double g_prime = 1 - (f(t + dt, y_next) - f(t, y)) / 2;
+
+        // Avoid division by zero
+        if (fabs(g_prime) < 1e-12) {
+            throw Exception("Division by zero in Newton's method.");
+        }
+
+        double y_next_new = y_next - g / g_prime;
+
+        // Check for convergence
+        if (fabs(y_next_new - y_next) < tolerance) {
+            return y_next_new;
+        }
+
+        y_next = y_next_new;
+        if (i == maxIterations - 1){
+            throw Exception("The Algorithm didn't converge: no fixed point.");
+        }
     }
-    
-    double y_next_new = y_next - g / g_prime;
-    
-    // Check for convergence
-    if (fabs(y_next_new - y_next) < tolerance) {
-      return y_next_new;
-    }
-    
-    y_next = y_next_new;
-  }
-  
-  // Return the best approximation after maxIterations
-  return y_next;
+    return y_next;
 }
