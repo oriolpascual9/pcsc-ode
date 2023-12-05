@@ -26,10 +26,25 @@ public:
     //! Documentation TODO
     void solve(DiscreteSolver& solver) override;
 
+    // Getter for init_y
+    double getInitY() const {
+        return init_y;
+    }
 
-  /* ------------------------------------------------------------------------ */
-  /* Members                                                                  */
-  /* ------------------------------------------------------------------------ */
+    // Getter for init_t
+    double getInitT() const {
+        return init_t;
+    }
+
+    // Getter for delta_t
+    double getDeltaT() const {
+        return delta_t;
+    }
+
+    // Getter for n
+    int getN() const {
+        return n;
+    }
 
 private:
     double init_y;

@@ -28,7 +28,7 @@ class Reader
   /* ------------------------------------------------------------------------ */
 
 public:
-  Reader();
+  Reader() {};
   //! Documentation TODO
   Problem& read_problem();
   //! Documentation TODO
