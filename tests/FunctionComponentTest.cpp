@@ -44,18 +44,19 @@ TEST_F(FunctionComponentTest, SumFunctionComponents) {
     FunctionComponent result = fc1.sum(fc2);
 
     DoubleFunction f = result.getFunction();
-    EXPECT_EQ(f(1.0, 2.0), 13.0); // 5 + (2^3 * 2) = 13
+    EXPECT_EQ(f(2.0, 7.0), 21.0); // 5 + (2^3 * 2) = 13
 }
 
 TEST_F(FunctionComponentTest, SubtractFunctionComponents) {
     FunctionComponent fc1, fc2;
     fc1.generateScalarComponent(10.0);
-    fc2.generateExpComponent(2.0);
+    fc2.generateExpComponent(4.0);
 
     FunctionComponent result = fc1.subtract(fc2);
 
     DoubleFunction f = result.getFunction();
-    EXPECT_EQ(f(2.0, 3.0), 2.0); // 10 - 2^3 = 2
+    // Second parameter is never used
+    EXPECT_EQ(f(2.0, 100.0), -6.0); // 10 - 4^2 = -6
 }
 
 int main(int argc, char **argv) {

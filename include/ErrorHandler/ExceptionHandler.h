@@ -4,7 +4,7 @@
 struct Exception {
 
     Exception(const std::string &mesg) : mesg(mesg){};
-    const std::string &what() { return mesg; };
+    const std::string& what() const { return mesg; }
     std::string mesg;
 
 };

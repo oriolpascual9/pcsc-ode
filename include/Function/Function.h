@@ -15,6 +15,8 @@ public:
     void addOperator(char sign);
     void addComponent(FunctionComponent component);
     DoubleFunction toDoubleFunction() const;
+    std::vector<char> getOperators();
+    std::vector<FunctionComponent> getComponents();
 
 };
 
