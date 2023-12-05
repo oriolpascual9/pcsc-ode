@@ -4,6 +4,7 @@
 #include<vector>
 
 #include "FunctionComponent/FunctionComponent.h"
+#include "ErrorHandler/ExceptionHandler.h"
 
 class Function {
 private:

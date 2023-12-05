@@ -72,7 +72,7 @@ void Reader::parse_function_poly(Function& function, const std::string& input) {
   std::regex termPattern(R"(([-+]?[0-9]*\.?[0-9]+)\*x\^([-+]?[0-9]*\.?[0-9]+))");
   
   while (iss >> token) {
-    if (token == "+" || token == "-" || token == "*" || token == "/") {
+    if (token == "+" || token == "-") { // for future expansion: || token == "*" || token == "/"
       function.addOperator(token[0]);
     } else {
       FunctionComponent component;
@@ -108,7 +108,7 @@ void Reader::parse_function_exp(Function& function, const std::string& input) {
   std::regex expPattern(R"(([-+]?[0-9]*\.?[0-9]+)\^y)");
   
   while (iss >> token) {
-    if (token == "+" || token == "-" || token == "*" || token == "/") {
+    if (token == "+" || token == "-" ) { // for future expansion: || token == "*" || token == "/"
       function.addOperator(token[0]);
     } else {
       FunctionComponent component;
