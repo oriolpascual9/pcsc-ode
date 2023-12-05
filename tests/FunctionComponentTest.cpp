@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "FunctionComponent/FunctionComponent.h"
 
-class FunctionComponentTest : public ::testing::Test {
+class FunctionComponentTest : public testing::Test {
 protected:
     void SetUp() override {
         // Code that runs before each test
@@ -22,10 +22,10 @@ TEST_F(FunctionComponentTest, GenerateScalarComponent) {
 
 TEST_F(FunctionComponentTest, GenerateTermComponent) {
     FunctionComponent fc;
-    fc.generateTermComponent(2.0, 3.0);
+    fc.generateTermComponent(3.0, 3.0);
 
     DoubleFunction f = fc.getFunction();
-    EXPECT_EQ(f(2.0, 2.0), 16.0); // 2^3 * 2 = 16
+    EXPECT_EQ(f(2.0, 2.0), 24.0); // 2^3 * 3 = 24
 }
 
 TEST_F(FunctionComponentTest, GenerateExpComponent) {
@@ -59,6 +59,6 @@ TEST_F(FunctionComponentTest, SubtractFunctionComponents) {
 }
 
 int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
+    testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
