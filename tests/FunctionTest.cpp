@@ -42,7 +42,7 @@ ASSERT_EQ(1, components.size());
 TEST_F(FunctionTest, ToDoubleFunctionTest) {
 Function function;
 function.addOperator('+');
-function.addOperator('-');
+function.addOperator('+');
 function.addOperator('+');
 
 FunctionComponent fc1;
@@ -52,7 +52,7 @@ FunctionComponent fc4;
 
 fc1.generateScalarComponent(5.0); // 5
 fc2.generateTermComponent(2.0, 3.0); // 2 * x ^ 3
-fc3.generateScalarComponent(10.0); // 10
+fc3.generateScalarComponent(-10.0); // -10
 fc4.generateExpComponent(4.0); // 4 ^ x
 
 function.addComponent(fc1);
