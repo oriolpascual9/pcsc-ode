@@ -30,7 +30,7 @@ public:
      *
      * Initializes a new instance of RungeKuttaSolver with default parameters.
      */
-    RungeKuttaSolver();
+    RungeKuttaSolver(){};
 
     /**
      * @brief Overridden solve method for the Runge-Kutta method.

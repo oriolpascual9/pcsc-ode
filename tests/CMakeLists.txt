@@ -43,6 +43,7 @@ include_directories(${PROJECT_SOURCE_DIR}/../gnuplot-iostream)
 # Include directories for Google Test and your project
 include_directories(${PROJECT_SOURCE_DIR}/../include)
 
+include_directories(${Boost_INCLUDE_DIRS})
 ######################################
 ## FUNCTION COMPONENT
 ######################################
@@ -142,27 +143,58 @@ set_target_properties(FileOutputTests PROPERTIES
 ######################################
 
 # Add your source files
-set(SOURCES_GRAPH_OUTPUT
-        GraphOutputTest.cpp
-        ../src/Output/GraphOutput.cpp
-        ../src/Output/FileOutput.cpp
-        ../src/Output/AbstractOutput.cpp
+#set(SOURCES_GRAPH_OUTPUT
+#        GraphOutputTest.cpp
+#        ../src/Output/GraphOutput.cpp
+#        ../src/Output/FileOutput.cpp
+#        ../src/Output/AbstractOutput.cpp
+#)
+
+# Create an executable for the tests
+#add_executable(GraphOutputTests ${SOURCES_GRAPH_OUTPUT})
+
+# Link against Google Test and pthread
+#target_link_libraries(GraphOutputTests
+#        gtest_main
+#        ${GTEST_BOTH_LIBRARIES}
+#        pthread
+#        Boost::iostreams
+#        Boost::system
+#        Boost::filesystem
+#)
+
+# Set the output directory for the executable (optional)
+#set_target_properties(GraphOutputTests PROPERTIES
+        #RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+#)
+
+######################################
+## SOLVERS
+######################################
+
+# Add your source files
+set(SOURCES_SOLVERS
+        SolversTest.cpp
+        ../src/Solver/DiscreteSolver.cpp
+        ../src/Solver/AdamBashforthSolver.cpp
+        ../src/Solver/BackwardEulerSolver.cpp
+        ../src/Solver/ForwardEulerSolver.cpp
+        ../src/Solver/RungeKuttaSolver.cpp
+        ../src/Function/Function.cpp
+        ../src/FunctionComponent/FunctionComponent.cpp
 )
 
 # Create an executable for the tests
-add_executable(GraphOutputTests ${SOURCES_GRAPH_OUTPUT})
+add_executable(SolverTests ${SOURCES_SOLVERS})
 
 # Link against Google Test and pthread
-target_link_libraries(GraphOutputTests
+target_link_libraries(SolverTests
         gtest_main
         ${GTEST_BOTH_LIBRARIES}
         pthread
-        Boost::iostreams
-        Boost::system
-        Boost::filesystem
 )
 
 # Set the output directory for the executable (optional)
-set_target_properties(GraphOutputTests PROPERTIES
+set_target_properties(SolverTests PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )

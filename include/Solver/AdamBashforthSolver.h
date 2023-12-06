@@ -29,7 +29,7 @@ public:
      *
      * Initializes a new instance of AdamBashforthSolver with default parameters.
      */
-    AdamBashforthSolver();
+    AdamBashforthSolver(){};
 
     /**
      * @brief Overridden solve method for the Adam-Bashforth method.

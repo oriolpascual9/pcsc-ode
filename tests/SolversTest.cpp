@@ -3,12 +3,12 @@
 #include "Solver/BackwardEulerSolver.h"
 #include "Solver/ForwardEulerSolver.h"
 #include "Solver/RungeKuttaSolver.h"
+#include "Function/function.h"
 #include <cmath>
 #include <vector>
 #include <utility>
 
 // Define a common test function and analytical solution
-DoubleFunction testFunction = [](double t, double y) { return y; };
 double analyticalSolution(double t) { return std::exp(t); };
 
 // Base class for solver tests
@@ -16,8 +16,10 @@ class SolverTestBase : public ::testing::Test {
 protected:
     const double initialTime = 0.0;
     const double initialY = 1.0; // y(0) = 1
-    const double dt = 0.1;
+    const double dt = 1e-5;
     const int n = 10; // Number of steps
+    Function function;
+    FunctionComponent fc1;
 
     std::vector<double> times;
     std::vector<double> analyticalResults;
@@ -28,6 +30,8 @@ protected:
             times.push_back(t);
             analyticalResults.push_back(analyticalSolution(t));
         }
+        fc1.generateTermComponent(1.0, 1.0);
+        function.addComponent(fc1);
     }
 
     void checkAccuracy(const std::vector<double>& ys) {
@@ -66,37 +70,37 @@ protected:
 };
 
 TEST_F(AdamBashforthSolverTest, SolverAccuracy) {
-    solver.setFunction(testFunction);
-    solver.setInitialCondition(initialTime, initialY);
-    solver.setStepSize(dt);
-    solver.setNumberOfSteps(n);
+    solver.setFunction(function);
+    solver.setInitialY(initialY);
+    solver.setDeltaT(dt);
+    solver.setN(n);
     auto [ts, ys] = solver.solve();
     checkAccuracy(ys);
 }
 
 TEST_F(BackwardEulerSolverTest, SolverAccuracy) {
-    solver.setFunction(testFunction);
-    solver.setInitialCondition(initialTime, initialY);
-    solver.setStepSize(dt);
-    solver.setNumberOfSteps(n);
+    solver.setFunction(function);
+    solver.setInitialY(initialY);
+    solver.setDeltaT(dt);
+    solver.setN(n);
     auto [ts, ys] = solver.solve();
     checkAccuracy(ys);
 }
 
 TEST_F(ForwardEulerSolverTest, SolverAccuracy) {
-    solver.setFunction(testFunction);
-    solver.setInitialCondition(initialTime, initialY);
-    solver.setStepSize(dt);
-    solver.setNumberOfSteps(n);
+    solver.setFunction(function);
+    solver.setInitialY(initialY);
+    solver.setDeltaT(dt);
+    solver.setN(n);
     auto [ts, ys] = solver.solve();
     checkAccuracy(ys);
 }
 
 TEST_F(RungeKuttaSolverTest, SolverAccuracy) {
-    solver.setFunction(testFunction);
-    solver.setInitialCondition(initialTime, initialY);
-    solver.setStepSize(dt);
-    solver.setNumberOfSteps(n);
+    solver.setFunction(function);
+    solver.setInitialY(initialY);
+    solver.setDeltaT(dt);
+    solver.setN(n);
     auto [ts, ys] = solver.solve();
     checkAccuracy(ys);
 }

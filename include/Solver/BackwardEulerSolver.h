@@ -31,7 +31,7 @@ public:
      *
      * Initializes a new instance of BackwardEulerSolver with default parameters.
      */
-    BackwardEulerSolver();
+    BackwardEulerSolver(){};
 
     /**
      * @brief Overridden solve method for the Backward Euler method.

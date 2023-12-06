@@ -31,14 +31,8 @@ public:
      * Initializes a new instance of Solver. This constructor is typically used
      * by derived classes to set up common solver elements.
      */
-    Solver();
+    Solver(){};
 
-    /**
-     * @brief Virtual destructor for Solver.
-     *
-     * Ensures that derived classes can perform proper cleanup upon destruction.
-     */
-    virtual ~Solver();
 
     /**
      * @brief Pure virtual solve method.

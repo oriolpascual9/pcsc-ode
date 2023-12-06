@@ -30,7 +30,7 @@ public:
      *
      * Initializes a new instance of ForwardEulerSolver with default parameters.
      */
-    ForwardEulerSolver();
+    ForwardEulerSolver(){};
 
     /**
      * @brief Overridden solve method for the Forward Euler method.

@@ -42,7 +42,7 @@ public:
      *
      * Initializes a new instance of DiscreteSolver with default values.
      */
-    DiscreteSolver();
+    DiscreteSolver(){};
 
     /**
      * @brief Pure virtual solve method.
