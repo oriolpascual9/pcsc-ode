@@ -4,6 +4,26 @@ project(tests)
 # Set the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 
+####################### FETCH BOOST
+
+set(BOOST_INCLUDE_LIBRARIES filesystem system iostreams)
+set(BOOST_ENABLE_CMAKE ON)
+
+# Download and extract the boost library from GitHub
+message(STATUS "Downloading and extracting boost library sources. This will take some time...")
+include(FetchContent)
+Set(FETCHCONTENT_QUIET FALSE) # Needed to print downloading progress
+FetchContent_Declare(
+        Boost
+        URL https://github.com/boostorg/boost/releases/download/boost-1.81.0/boost-1.81.0.7z # downloading a zip release speeds up the download
+        USES_TERMINAL_DOWNLOAD TRUE
+        GIT_PROGRESS TRUE
+        DOWNLOAD_NO_EXTRACT FALSE
+)
+FetchContent_MakeAvailable(Boost)
+
+####################### FETCH GOOGLETEST
+
 include(FetchContent)
 FetchContent_Declare(
   googletest
@@ -14,10 +34,9 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-# find dependencies (Boost)
-find_package(Boost REQUIRED COMPONENTS
-        iostreams system filesystem
-)
+######################
+
+
 # adds the search path for includes
 include_directories(${PROJECT_SOURCE_DIR}/../gnuplot-iostream)
 
