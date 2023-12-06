@@ -3,7 +3,7 @@
 #include "Solver/BackwardEulerSolver.h"
 #include "Solver/ForwardEulerSolver.h"
 #include "Solver/RungeKuttaSolver.h"
-#include "Function/function.h"
+#include "Function/Function.h"
 #include <cmath>
 #include <vector>
 #include <utility>

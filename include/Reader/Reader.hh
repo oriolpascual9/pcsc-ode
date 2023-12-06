@@ -13,6 +13,7 @@
 #include "Function/Function.h"
 #include "FunctionComponent/FunctionComponent.h"
 #include "ErrorHandler/ExceptionHandler.h"
+#include "Solver/DiscreteSolver.hh"
 
 /* -------------------------------------------------------------------------- */
 

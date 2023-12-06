@@ -8,6 +8,7 @@
 class FileOutputTest : public ::testing::Test {
 protected:
     std::string testOutputPath = "test_output_directory";
+    std::string testId = "test_id";
     std::vector<double> ys = {1.0, 2.0, 3.0};
     std::vector<double> ts = {0.1, 0.2, 0.3};
 
@@ -24,7 +25,7 @@ protected:
 
 // Test createDataFile method for successful file creation
 TEST_F(FileOutputTest, OutputSuccessTest) {
-    FileOutput fileOutput(ys, ts, testOutputPath);
+    FileOutput fileOutput(ys, ts, testOutputPath, testId);
     ASSERT_NO_THROW(fileOutput.output());
 
     // Read the file and check its contents
@@ -47,6 +48,6 @@ TEST_F(FileOutputTest, OutputSuccessTest) {
 // Test createDataFile method for handling errors
 TEST_F(FileOutputTest, OutputErrorTest) {
     // Using an invalid path to induce an error
-    FileOutput fileOutput(ys, ts, "invalid_path");
+    FileOutput fileOutput(ys, ts, "invalid_path", testId);
     ASSERT_THROW(fileOutput.output(), Exception);
 }

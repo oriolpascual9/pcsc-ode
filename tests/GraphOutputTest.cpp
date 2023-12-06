@@ -6,6 +6,7 @@
 class GraphOutputTest : public ::testing::Test {
 protected:
     std::string testOutputPath = "test_output";
+    std::string testId = "test_id";
     std::vector<double> ys = {1.0, 2.0, 3.0};
     std::vector<double> ts = {0.1, 0.2, 0.3};
 
@@ -22,7 +23,7 @@ protected:
 
 // Test plot method for successful plot creation
 TEST_F(GraphOutputTest, OutputSuccessTest) {
-    GraphOutput graphOutput(ys, ts, testOutputPath);
+    GraphOutput graphOutput(ys, ts, testOutputPath, testId);
     ASSERT_NO_THROW(graphOutput.output());
 
     // Check if the plot file is created
@@ -32,6 +33,6 @@ TEST_F(GraphOutputTest, OutputSuccessTest) {
 // Test plot method for error handling
 TEST_F(GraphOutputTest, OutputErrorTest) {
     // You need a scenario that causes plot() to fail, such as an invalid path
-    GraphOutput graphOutput(ys, ts, "invalid_path");
+    GraphOutput graphOutput(ys, ts, "invalid_path", testId);
     ASSERT_THROW(graphOutput.output(), Exception);
 }

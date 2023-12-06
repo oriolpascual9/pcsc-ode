@@ -33,7 +33,6 @@ public:
      */
     Solver(){};
 
-
     /**
      * @brief Pure virtual solve method.
      * @return The solution of the computational problem, of type T.

@@ -102,6 +102,10 @@ set(SOURCES_READER_ODE
         ../src/Problem/Problem.cpp
         ../src/Problem/Problem_ODE.cpp
         ../src/Solver/DiscreteSolver.cpp
+        ../src/Solver/AdamBashforthSolver.cpp
+        ../src/Solver/BackwardEulerSolver.cpp
+        ../src/Solver/ForwardEulerSolver.cpp
+        ../src/Solver/RungeKuttaSolver.cpp
 )
 
 # Create an executable for the tests

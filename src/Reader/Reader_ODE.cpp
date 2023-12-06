@@ -34,27 +34,24 @@ DiscreteSolver& Reader_ODE::read_discrete_solver() {
     int n;
     std::cin >> n;
 
+    DiscreteSolver* solver = nullptr;
     switch(n) {
         case 1: {
-            AdamBashforthSolver ABsolver;
-            return ABsolver;
+            solver = new AdamBashforthSolver();
         }
         case 2: {
-            BackwardEulerSolver BEsolver;
-            return BEsolver;
+            solver = new BackwardEulerSolver();
         }
         case 3: {
-            ForwardEulerSolver FEsolver;
-            return FEsolver;
+            solver = new ForwardEulerSolver();
         }
         case 4: {
-            RungeKuttaSolver RKsolver;
-            return RKsolver;
+            solver = new RungeKuttaSolver();
         }
-
         default:
             throw Exception("Number of solver not supported");
     }
+    return *solver;
 }
 
 /* --------------------------------------------------------------------------- */
