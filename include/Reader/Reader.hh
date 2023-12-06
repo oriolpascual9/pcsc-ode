@@ -33,6 +33,8 @@ public:
   //! Documentation TODO
   Problem& read_problem();
 
+  int read_type_of_output();
+
   virtual DiscreteSolver& read_discrete_solver() = 0;
   //! Documentation TODO
   Function read_function();

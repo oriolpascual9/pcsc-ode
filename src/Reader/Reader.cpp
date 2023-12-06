@@ -27,6 +27,22 @@ int Reader::read_type_of_problem() {
     return type;
 }
 
+int Reader::read_type_of_output() {
+    std::cout << "Select type of output:\n";
+    std::cout << "  1. Graph\n";
+    std::cout << "  2. File\n";
+
+    int choice;
+    std::cin >> choice;
+
+    // Validate the input
+    while (choice < 1 || choice > 2) {
+        std::cout << "Invalid choice. Please select 1, or 2:\n";
+        std::cin >> choice;
+    }
+
+    return choice;
+}
 /* --------------------------------------------------------------------------- */
 
 Function Reader::choose_parse_function() {

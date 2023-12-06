@@ -46,7 +46,13 @@ public:
     // Getter for n
     int getN() const;
 
+    // Getter for function
     Function getFunction() const;
+
+    //Getter for solution
+    std::pair<std::vector<double>, std::vector<double>> getSolution() const;
+
+    std::string getID() const;
 
     /**
      * @brief Parameterized constructor for Problem_ODE.
