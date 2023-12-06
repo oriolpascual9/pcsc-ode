@@ -49,7 +49,7 @@ public:
      * Initializes the GraphOutput object with given vectors of computed values,
      * their corresponding times, and the path for the graph output.
      */
-    GraphOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath);
+    GraphOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath, std::string id);
 
     /**
      * @brief Overridden output method for graph plotting.

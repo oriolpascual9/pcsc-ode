@@ -1,6 +1,4 @@
 #include "Output/FileOutput.h"
-#include <fstream>
-#include <iostream>
 
 /**
  * @brief Constructor for FileOutput.
@@ -10,8 +8,8 @@
  *
  * Initializes the FileOutput object with the provided vectors and output path.
  */
-FileOutput::FileOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath)
-        : AbstractOutput(ys, ts), outputPath(outputPath) {}
+FileOutput::FileOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath, std::string id)
+        : AbstractOutput(ys, ts, id), outputPath(outputPath) {}
 
 /**
  * @brief Creates a data file at the specified output path.
@@ -24,7 +22,7 @@ void FileOutput::createDataFile() const {
         throw Exception("Output path does not exist");
     }
 
-    std::ofstream dataFile(outputPath + "/data.dat");
+    std::ofstream dataFile(outputPath + '/' + id);
     if (!dataFile.is_open()) {
         throw Exception("Error creating data file.");
     }

@@ -31,6 +31,8 @@ public:
   Reader() {};
   //! Documentation TODO
   Problem& read_problem();
+
+  virtual DiscreteSolver& read_discrete_solver() = 0;
   //! Documentation TODO
   Function read_function();
   //! Documentation TODO

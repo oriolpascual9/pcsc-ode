@@ -8,8 +8,8 @@
  *
  * Initializes the GraphOutput object with the provided vectors and output path.
  */
-GraphOutput::GraphOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath)
-        : AbstractOutput(ys, ts), outputPath(outputPath) {}
+GraphOutput::GraphOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath, std::string id)
+        : AbstractOutput(ys, ts, id), outputPath(outputPath) {}
 
 /**
  * @brief Creates a plot of the data.
@@ -18,14 +18,14 @@ GraphOutput::GraphOutput(const std::vector<double>& ys, const std::vector<double
  * Generates a plot using GNUplot based on the data stored in the object. The plot is saved to the specified outputPath.
  */
 void GraphOutput::plot() const {
-    FileOutput fileOutput(ys, ts, outputPath);
+    FileOutput fileOutput(ys, ts, outputPath, id);
     fileOutput.output();
     Gnuplot gp;
     // Sets the terminal and output file
     gp << "set terminal png size 800,600\n";
-    gp << "set output '" << outputPath << "/plot.png'\n";
+    gp << "set output '" << outputPath << "/" << id << ".png'\n";
     // Plots the data from the file
-    gp << "plot '" << outputPath << "/data.dat' using 1:2 with lines\n";
+    gp << "plot '" << outputPath << "/"<< id << "using 1:2 with lines\n";
 }
 
 /**

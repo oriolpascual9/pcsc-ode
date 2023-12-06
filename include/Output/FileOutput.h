@@ -3,6 +3,9 @@
 
 #include "AbstractOutput.h"
 
+#include <fstream>
+#include <iostream>
+
 /**
  * @file FileOutput.h
  * @brief Header file for the FileOutput class.
@@ -44,7 +47,7 @@ public:
      * Initializes the FileOutput object with given vectors of computed values,
      * their corresponding times, and the path for the output file.
      */
-    FileOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath);
+    FileOutput(const std::vector<double>& ys, const std::vector<double>& ts, const std::string& outputPath, std::string id);
 
     /**
      * @brief Overridden output method for file writing.

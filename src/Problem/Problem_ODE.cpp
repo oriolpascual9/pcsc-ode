@@ -2,7 +2,10 @@
 #include "Problem/Problem_ODE.hh"
 /* -------------------------------------------------------------------------- */
 Problem_ODE::Problem_ODE(double init_y, double init_t, double delta_t, int n, Function function) : Problem () {
-    this->id = "ODE_test";
+    std::chrono::milliseconds ms = duration_cast< std::chrono::milliseconds >(
+        std::chrono::system_clock::now().time_since_epoch()
+    );
+    this->id = "ODE_" + std::to_string(ms.count());
     this->init_y = init_y;
     this->init_t = init_t;
     this->delta_t = delta_t;

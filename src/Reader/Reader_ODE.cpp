@@ -24,6 +24,39 @@ Problem_ODE Reader_ODE::read_ODE_Problem(){
     return Problem_ODE(init_y, init_t, delta_t, n, function);
 }
 
+DiscreteSolver& Reader_ODE::read_discrete_solver() {
+    std::cout << "Please select the ODE Solver\n";
+    std::cout << "  1. AdamsBashforth solver\n";
+    std::cout << "  2. BackwardEuler solver\n";
+    std::cout << "  3. ForwardEuler solver\n";
+    std::cout << "  4. RungaKutta solver\n";
+
+    int n;
+    std::cin >> n;
+
+    switch(n) {
+        case 1: {
+            AdamBashforthSolver ABsolver;
+            return ABsolver;
+        }
+        case 2: {
+            BackwardEulerSolver BEsolver;
+            return BEsolver;
+        }
+        case 3: {
+            ForwardEulerSolver FEsolver;
+            return FEsolver;
+        }
+        case 4: {
+            RungeKuttaSolver RKsolver;
+            return RKsolver;
+        }
+
+        default:
+            throw Exception("Number of solver not supported");
+    }
+}
+
 /* --------------------------------------------------------------------------- */
 
 

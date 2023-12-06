@@ -27,6 +27,7 @@ class AbstractOutput {
 protected:
     std::vector<double> ys; ///< Computed values.
     std::vector<double> ts; ///< Corresponding time or independent variable values.
+    std::string id;
 
 public:
     /**
@@ -36,7 +37,7 @@ public:
      *
      * Initializes the AbstractOutput with given vectors of computed values and their corresponding times.
      */
-    AbstractOutput(const std::vector<double>& ys, const std::vector<double>& ts);
+    AbstractOutput(const std::vector<double>& ys, const std::vector<double>& ts, std::string id);
 
     /**
      * @brief Virtual destructor for AbstractOutput.

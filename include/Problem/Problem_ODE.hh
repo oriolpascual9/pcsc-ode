@@ -5,6 +5,7 @@
 #include "Solver/DiscreteSolver.hh"
 #include "Problem.hh"
 #include "Function/Function.h"
+#include <chrono>
 
 /**
  * @file Problem_ODE.hh
