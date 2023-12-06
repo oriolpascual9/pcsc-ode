@@ -6,7 +6,7 @@
 #include "ErrorHandler/ExceptionHandler.h"
 #include <cstdlib>
 #include <iostream>
-#include "gnuplot-iostream.h"
+// #include "gnuplot-iostream.h"
 
 /**
  * @file GraphOutput.h
