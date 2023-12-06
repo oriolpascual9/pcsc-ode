@@ -1,6 +1,4 @@
 #include "Output/GraphOutput.h"
-#include <cstdlib>
-#include <iostream>
 
 /**
  * @brief Constructor for GraphOutput.
@@ -20,21 +18,14 @@ GraphOutput::GraphOutput(const std::vector<double>& ys, const std::vector<double
  * Generates a plot using GNUplot based on the data stored in the object. The plot is saved to the specified outputPath.
  */
 void GraphOutput::plot() const {
-    try {
-        createDataFile();
-    } catch (const Exception &e) {
-        std::cerr << e.what() << std::endl;
-        return;
-    }
-
-    std::string gnuplotCommand = "gnuplot -persist -e \"set terminal png size 800,600; "
-                                 "set output '" + outputPath + "/plot.png'; "
-                                                               "plot '" + outputPath + "/data.dat' using 1:2 with lines\"";
-    int result = system(gnuplotCommand.c_str());
-
-    if (result == -1) {
-        throw Exception("Error executing GNUplot.");
-    }
+    FileOutput fileOutput(ys, ts, outputPath);
+    fileOutput.output();
+    Gnuplot gp;
+    // Sets the terminal and output file
+    gp << "set terminal png size 800,600\n";
+    gp << "set output '" << outputPath << "/plot.png'\n";
+    // Plots the data from the file
+    gp << "plot '" << outputPath << "/data.dat' using 1:2 with lines\n";
 }
 
 /**
@@ -44,10 +35,6 @@ void GraphOutput::plot() const {
  * Catches and reports any exceptions encountered during plotting.
  */
 void GraphOutput::output() const {
-    try {
-        plot();
-    } catch (const Exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
+    plot();
 }
 

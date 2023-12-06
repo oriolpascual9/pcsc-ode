@@ -20,6 +20,10 @@ FileOutput::FileOutput(const std::vector<double>& ys, const std::vector<double>&
  * Writes the time and computed values to a data file in a structured format.
  */
 void FileOutput::createDataFile() const {
+    if (!std::filesystem::exists(outputPath)) {
+        throw Exception("Output path does not exist");
+    }
+
     std::ofstream dataFile(outputPath + "/data.dat");
     if (!dataFile.is_open()) {
         throw Exception("Error creating data file.");
@@ -39,9 +43,5 @@ void FileOutput::createDataFile() const {
  * reports any exceptions encountered during file creation.
  */
 void FileOutput::output() const {
-    try {
         createDataFile();
-    } catch (const Exception& e) {
-        std::cerr << e.what() << std::endl;
-    }
 }

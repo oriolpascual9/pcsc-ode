@@ -2,7 +2,11 @@
 #define GRAPH_OUTPUT_H
 
 #include "AbstractOutput.h"
+#include "FileOutput.h"
 #include "ErrorHandler/ExceptionHandler.h"
+#include <cstdlib>
+#include <iostream>
+#include "gnuplot-iostream.h"
 
 /**
  * @file GraphOutput.h

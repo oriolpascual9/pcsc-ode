@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include "ErrorHandler/ExceptionHandler.h"
+#include <filesystem>
 
 /**
  * @file AbstractOutput.h
