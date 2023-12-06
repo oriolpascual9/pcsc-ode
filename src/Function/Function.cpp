@@ -25,14 +25,9 @@ void Function::addComponent(FunctionComponent component) {
 DoubleFunction Function::toDoubleFunction() const {
     if (components.empty())
         throw Exception("Trying to convert the function but the function has no component defined");
-
     FunctionComponent currentComponent = components[0];
     for (int i = 1; i < components.size(); ++i) {
-        std::cout << operators[i-1] << '\n';
-        if (operators[i-1] == '+')
-            currentComponent = currentComponent.sum(components[i]);
-        else
-            currentComponent = currentComponent.subtract(components[i]);
+        currentComponent = currentComponent.sum(components[i]);
     }
 
     return currentComponent.getFunction();

@@ -5,22 +5,17 @@ Problem_ODE Reader_ODE::read_ODE_Problem(){
     double init_y, init_t, delta_t;
     int n;
     std::cout << "Please enter initial conditions for the ODE problem\n";
-    std::cout << "Initial y:";
+    std::cout << "Initial y:\n";
     std::cin >> init_y;
-    std::cout << "\n";
 
-    std::cout << "Initial t:";
+    std::cout << "Initial t:\n";
     std::cin >> init_t;
-    std::cout << "\n";
-    
-    std::cout << "Timestep:";
+
+    std::cout << "Timestep:\n";
     std::cin >> delta_t;
-    std::cout << "\n";
 
-    std::cout << "Number of steps:";
+    std::cout << "Number of steps:\n";
     std::cin >> n;
-    std::cout << "\n";
-
     // assert if there are some restrictions to the variables
     
     Function function;

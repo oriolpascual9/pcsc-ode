@@ -58,20 +58,3 @@ FunctionComponent FunctionComponent::sum(const FunctionComponent &other) const {
     return result;
 }
 
-/**
- * @brief Subtracts another component from this one.
- * @param other The FunctionComponent to subtract.
- * @return The resulting FunctionComponent after subtraction.
- */
-FunctionComponent FunctionComponent::subtract(const FunctionComponent &other) const {
-    DoubleFunction f1 = this->functionComponent;
-    DoubleFunction f2 = other.functionComponent;
-
-    FunctionComponent result;
-    result.functionComponent = [f1, f2](double t, double y) {
-        return f1(t, y) - f2(t, y);
-    };
-
-    return result;
-}
-

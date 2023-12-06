@@ -6,6 +6,7 @@ Problem_ODE::Problem_ODE(double init_y, double init_t, double delta_t, int n, Fu
     this->init_y = init_y;
     this->init_t = init_t;
     this->delta_t = delta_t;
+    this->n = n;
     this->function = function;
 }
 
@@ -17,4 +18,30 @@ void Problem_ODE::solve(DiscreteSolver& solver)
     solver.setN(n);
     solution = solver.solve();
 }
+
+
+// Getter for init_y
+double Problem_ODE::getInitY() const {
+    return init_y;
+}
+
+// Getter for init_t
+double Problem_ODE::getInitT() const {
+    return init_t;
+}
+
+// Getter for delta_t
+double Problem_ODE::getDeltaT() const {
+    return delta_t;
+}
+
+// Getter for n
+int Problem_ODE::getN() const {
+    return n;
+}
+
+Function Problem_ODE::getFunction() const {
+    return function;
+}
+
 /* --------------------------------------------------------------------------- */

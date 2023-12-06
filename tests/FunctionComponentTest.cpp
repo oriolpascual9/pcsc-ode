@@ -47,18 +47,6 @@ TEST_F(FunctionComponentTest, SumFunctionComponents) {
     EXPECT_EQ(f(2.0, 7.0), 21.0); // 5 + (2^3 * 2) = 13
 }
 
-TEST_F(FunctionComponentTest, SubtractFunctionComponents) {
-    FunctionComponent fc1, fc2;
-    fc1.generateScalarComponent(10.0);
-    fc2.generateExpComponent(4.0);
-
-    FunctionComponent result = fc1.subtract(fc2);
-
-    DoubleFunction f = result.getFunction();
-    // Second parameter is never used
-    EXPECT_EQ(f(2.0, 100.0), -6.0); // 10 - 4^2 = -6
-}
-
 int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

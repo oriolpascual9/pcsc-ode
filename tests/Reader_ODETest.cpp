@@ -18,13 +18,14 @@ protected:
 };
 
 TEST_F(ReaderODETest, ChooseParseFunction_ValidInput) {
-    std::istringstream input("poly\n3*x^2\nn\n");
+    std::istringstream input("poly\n3*y^2\ny\nexp\n-2^y\nn");
     std::cin.rdbuf(input.rdbuf());
 
     Function function = readerODE.choose_parse_function();
 
-    // Verify that function contains the expected components
-    // This depends on the implementation of your Function class
+    DoubleFunction f = function.toDoubleFunction();
+
+    EXPECT_EQ(f(3, 100.0), 19); // 3*3^2 - 2^3
 }
 
 TEST_F(ReaderODETest, ChooseParseFunction_InvalidInput) {
@@ -33,16 +34,18 @@ TEST_F(ReaderODETest, ChooseParseFunction_InvalidInput) {
 
     EXPECT_THROW({
                      readerODE.choose_parse_function();
-                 }, std::exception);
+                 }, Exception);
 }
 
 TEST_F(ReaderODETest, ParseFunctionPoly_ValidInput) {
     Function function;
-    std::string input = "3*x^2";
+    std::string input = "3*y^2";
 
     readerODE.parse_function_poly(function, input);
 
-    // Verify that function contains the expected polynomial components
+    // no exception should be thrown
+    DoubleFunction f = function.toDoubleFunction();
+    EXPECT_EQ(f(2.0, 100.0), 12.0); // 3*2^2
 }
 
 TEST_F(ReaderODETest, ParseFunctionPoly_InvalidInput) {
@@ -51,7 +54,7 @@ TEST_F(ReaderODETest, ParseFunctionPoly_InvalidInput) {
 
     EXPECT_THROW({
                      readerODE.parse_function_poly(function, input);
-                 }, std::exception);
+                 }, std::invalid_argument);
 }
 
 TEST_F(ReaderODETest, ParseFunctionExp_ValidInput) {
@@ -60,7 +63,9 @@ TEST_F(ReaderODETest, ParseFunctionExp_ValidInput) {
 
     readerODE.parse_function_exp(function, input);
 
-    // Verify that function contains the expected exponential components
+    // no exception should be thrown
+    DoubleFunction f = function.toDoubleFunction();
+    EXPECT_EQ(f(2.0, 100.0), 6.25); // 2.5^2
 }
 
 TEST_F(ReaderODETest, ParseFunctionExp_InvalidInput) {
@@ -69,23 +74,23 @@ TEST_F(ReaderODETest, ParseFunctionExp_InvalidInput) {
 
     EXPECT_THROW({
                      readerODE.parse_function_exp(function, input);
-                 }, std::exception);
+                 }, Exception);
 }
 
+
 TEST_F(ReaderODETest, ReadODEProblem_ValidInput) {
-    std::istringstream input("1\n1\n0.1\n10\npoly\n3*x^2\nn\n");
+    std::istringstream input("1\n1\n0.1\n10\npoly\n3*y^2\nn\n");
     std::cin.rdbuf(input.rdbuf());
 
     Problem_ODE problem = readerODE.read_ODE_Problem();
 
-    // Verify the properties of the returned Problem_ODE object
-    // This depends on the implementation of your Problem_ODE class
-    // For example:
     EXPECT_EQ(problem.getInitY(), 1);
     EXPECT_EQ(problem.getInitT(), 1);
     EXPECT_EQ(problem.getDeltaT(), 0.1);
     EXPECT_EQ(problem.getN(), 10);
-    // ... and other checks as needed
+
+    DoubleFunction f = problem.getFunction().toDoubleFunction();
+    EXPECT_EQ(f(2.0, 100.0), 12.0); // 3*2^2
 }
 
 TEST_F(ReaderODETest, ReadODEProblem_InvalidInput) {
@@ -94,7 +99,7 @@ TEST_F(ReaderODETest, ReadODEProblem_InvalidInput) {
 
     EXPECT_THROW({
                      readerODE.read_ODE_Problem();
-                 }, std::exception);
+                 }, Exception);
 }
 
 int main(int argc, char **argv) {

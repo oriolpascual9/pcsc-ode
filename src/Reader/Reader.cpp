@@ -43,20 +43,15 @@ Function Reader::choose_parse_function() {
         std::cin.ignore(); // Ignore leftover newline from previous input
         std::getline(std::cin, functionStr);
 
-        try {
-            if (functionType == "poly") {
-                parse_function_poly(function, functionStr);
-            } else if (functionType == "exp") {
-                parse_function_exp(function, functionStr);
-            } else {
-                throw Exception("Error: Unrecognized function type '" + functionType + "'");
-            }
-        } catch (const Exception& e) {
-            std::cerr << "Exception caught: " << e.what() << '\n';
-            break;
+        if (functionType == "poly") {
+            parse_function_poly(function, functionStr);
+        } else if (functionType == "exp") {
+            parse_function_exp(function, functionStr);
+        } else {
+            throw Exception("Error: Unrecognized function type '" + functionType + "'");
         }
 
-        std::cout << "Do you want to add another component? (y/n): ";
+        std::cout << "Do you want to add another component? (y/n): \n";
         std::cin >> continueParsing;
     }
 
@@ -69,23 +64,26 @@ void Reader::parse_function_poly(Function& function, const std::string& input) {
   std::string token;
   
   // Regular expression for matching polynomial terms like "3*x^2"
-  std::regex termPattern(R"(([-+]?[0-9]*\.?[0-9]+)\*x\^([-+]?[0-9]*\.?[0-9]+))");
+  std::regex termPattern(R"(([-+]?[0-9]*\.?[0-9]+)\*y\^([-+]?[0-9]*\.?[0-9]+))");
   
   while (iss >> token) {
-    if (token == "+" || token == "-") { // for future expansion: || token == "*" || token == "/"
+    if (token[0] == '+' || token[0] == '-') { // for future expansion: || token == "*" || token == "/"
       function.addOperator(token[0]);
-    } else {
+    }
       FunctionComponent component;
       
       // Check if the token is a scalar
-      try {
-        double scalar = std::stod(token);
-        component.generateScalarComponent(scalar);
-      } catch (const std::invalid_argument&) {
+        size_t idx;
+        double scalar = std::stod(token, &idx);
+
+        if (idx == token.size()) {
+            component.generateScalarComponent(scalar);
+        }
+        else {
         // Not a scalar, check if it is a term
         std::smatch matches;
         if (std::regex_match(token, matches, termPattern) && matches.size() == 3) {
-          double scalar = std::stod(matches[1]);
+            double scalar = std::stod(matches[1]);
           double exponent = std::stod(matches[2]);
           component.generateTermComponent(scalar, exponent);
         } else {
@@ -97,7 +95,6 @@ void Reader::parse_function_poly(Function& function, const std::string& input) {
       
       function.addComponent(component);
     }
-  }
 }
 
 void Reader::parse_function_exp(Function& function, const std::string& input) {
@@ -108,12 +105,12 @@ void Reader::parse_function_exp(Function& function, const std::string& input) {
   std::regex expPattern(R"(([-+]?[0-9]*\.?[0-9]+)\^y)");
   
   while (iss >> token) {
-    if (token == "+" || token == "-" ) { // for future expansion: || token == "*" || token == "/"
+    if (token[0] == '+' || token[0] == '-' ) { // for future expansion: || token == "*" || token == "/"
       function.addOperator(token[0]);
-    } else {
+    }
       FunctionComponent component;
       std::smatch matches;
-      
+
       if (std::regex_match(token, matches, expPattern) && matches.size() == 2) {
         double base = std::stod(matches[1]);
         // Assuming generateExpComponent creates an exponential component of type base^y
@@ -123,9 +120,8 @@ void Reader::parse_function_exp(Function& function, const std::string& input) {
               throw Exception("Error: Unrecognized component format '" + token + "'");
           }
       }
-      
+
       function.addComponent(component);
     }
-  }
 }
 /* --------------------------------------------------------------------------- */

@@ -33,26 +33,19 @@ public:
      */
     Problem_ODE();
 
-
     // Getter for init_y
-    double getInitY() const {
-        return init_y;
-    }
+    double getInitY() const;
 
     // Getter for init_t
-    double getInitT() const {
-        return init_t;
-    }
+    double getInitT() const;
 
     // Getter for delta_t
-    double getDeltaT() const {
-        return delta_t;
-    }
+    double getDeltaT() const;
 
     // Getter for n
-    int getN() const {
-        return n;
-    }
+    int getN() const;
+
+    Function getFunction() const;
 
     /**
      * @brief Parameterized constructor for Problem_ODE.

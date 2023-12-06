@@ -77,15 +77,6 @@ public:
      * This method adds another FunctionComponent to this one and returns the result.
      */
     FunctionComponent sum(const FunctionComponent &other) const;
-
-    /**
-     * @brief Subtracts another component from this one.
-     * @param other The FunctionComponent to subtract.
-     * @return The resulting FunctionComponent after subtraction.
-     *
-     * This method subtracts another FunctionComponent from this one and returns the result.
-     */
-    FunctionComponent subtract(const FunctionComponent &other) const;
 };
 
 

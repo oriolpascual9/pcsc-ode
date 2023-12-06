@@ -5,15 +5,10 @@
 #include <iostream>
 #include "Reader.hh"
 
-/**
-  * Documentation TODO
-  */
-
 class Reader_ODE: public Reader
 {
 public:
 
-  //! Documentation TODO
   Problem_ODE read_ODE_Problem() override;
 
 };
