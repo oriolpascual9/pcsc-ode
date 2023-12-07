@@ -1,5 +1,4 @@
 #include "Function/Function.h"
-#include <iostream>
 
 /**
  * @brief Adds an operator to the function.

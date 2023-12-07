@@ -29,7 +29,7 @@ TEST_F(FileOutputTest, OutputSuccessTest) {
     ASSERT_NO_THROW(fileOutput.output());
 
     // Read the file and check its contents
-    std::ifstream dataFile(testOutputPath + "/data.dat");
+    std::ifstream dataFile(testOutputPath + "/" + testId +".dat");
     ASSERT_TRUE(dataFile.is_open());
 
     std::string line;

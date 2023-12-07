@@ -202,3 +202,33 @@ target_link_libraries(SolverTests
 set_target_properties(SolverTests PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
 )
+
+######################################
+## PROBLEM_ODE
+######################################
+
+# Add your source files
+set(SOURCES_PROBLEM_ODE
+        Problem_ODETest.cpp
+        ../src/Problem/Problem.cpp
+        ../src/Problem/Problem_ODE.cpp
+        ../src/Solver/DiscreteSolver.cpp
+        ../src/Solver/RungeKuttaSolver.cpp
+        ../src/Function/Function.cpp
+        ../src/FunctionComponent/FunctionComponent.cpp
+)
+
+# Create an executable for the tests
+add_executable(ProblemODETests ${SOURCES_PROBLEM_ODE})
+
+# Link against Google Test and pthread
+target_link_libraries(ProblemODETests
+        gtest_main
+        ${GTEST_BOTH_LIBRARIES}
+        pthread
+)
+
+# Set the output directory for the executable (optional)
+set_target_properties(ProblemODETests PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)

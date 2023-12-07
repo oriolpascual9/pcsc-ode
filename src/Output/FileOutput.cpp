@@ -22,7 +22,7 @@ void FileOutput::createDataFile() const {
         throw Exception("Output path does not exist");
     }
 
-    std::ofstream dataFile(outputPath + '/' + id);
+    std::ofstream dataFile(outputPath + '/' + id + ".dat");
     if (!dataFile.is_open()) {
         throw Exception("Error creating data file.");
     }
