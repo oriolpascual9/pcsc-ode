@@ -32,7 +32,7 @@ public:
      *
      * Initializes a new instance of Problem_ODE with default parameters.
      */
-    Problem_ODE();
+    Problem_ODE() {};
 
     // Getter for init_y
     double getInitY() const;

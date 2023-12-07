@@ -27,7 +27,7 @@ TEST_F(GraphOutputTest, OutputSuccessTest) {
     ASSERT_NO_THROW(graphOutput.output());
 
     // Check if the plot file is created
-    ASSERT_TRUE(std::filesystem::exists(testOutputPath + "/plot.png"));
+    ASSERT_TRUE(std::filesystem::exists(testOutputPath + "/test_id.png"));
 }
 
 // Test plot method for error handling

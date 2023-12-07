@@ -25,7 +25,7 @@ void GraphOutput::plot() const {
     gp << "set terminal png size 800,600\n";
     gp << "set output '" << outputPath << "/" << id << ".png'\n";
     // Plots the data from the file
-    gp << "plot '" << outputPath << "/"<< id << "using 1:2 with lines\n";
+    gp << "plot '" << outputPath << "/"<< id << ".dat' using 1:2 with lines\n";
 }
 
 /**

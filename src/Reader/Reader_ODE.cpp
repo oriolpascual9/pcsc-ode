@@ -20,12 +20,12 @@ Problem_ODE Reader_ODE::read_ODE_Problem(){
     
     Function function;
     function = Reader::choose_parse_function();
-    
+
     return Problem_ODE(init_y, init_t, delta_t, n, function);
 }
 
 DiscreteSolver& Reader_ODE::read_discrete_solver() {
-    std::cout << "Please select the ODE Solver\n";
+    std::cout << "Please select the ODE Solver:\n";
     std::cout << "  1. AdamsBashforth solver\n";
     std::cout << "  2. BackwardEuler solver\n";
     std::cout << "  3. ForwardEuler solver\n";
@@ -38,19 +38,24 @@ DiscreteSolver& Reader_ODE::read_discrete_solver() {
     switch(n) {
         case 1: {
             solver = new AdamBashforthSolver();
+            break;
         }
         case 2: {
             solver = new BackwardEulerSolver();
+            break;
         }
         case 3: {
             solver = new ForwardEulerSolver();
+            break;
         }
         case 4: {
             solver = new RungeKuttaSolver();
+            break;
         }
         default:
             throw Exception("Number of solver not supported");
     }
+
     return *solver;
 }
 

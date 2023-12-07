@@ -5,12 +5,15 @@
 Problem& Reader::read_problem(){
     std::cout << "Welcome to the Solver";
     int type = read_type_of_problem();
+    Problem* problem = nullptr;
     switch (type)
     {
-    case 1:
-        Problem_ODE problem = read_ODE_Problem();
-        return problem;
+        case 1: {
+            problem = new Problem_ODE(read_ODE_Problem());
+            break;
+        }
     }
+    return *problem;
 }
 
 int Reader::read_type_of_problem() {
@@ -70,7 +73,6 @@ Function Reader::choose_parse_function() {
         std::cout << "Do you want to add another component? (y/n): \n";
         std::cin >> continueParsing;
     }
-
     return function;
 }
 
