@@ -47,4 +47,11 @@ Function Problem_ODE::getFunction() const {
     return function;
 }
 
+std::pair<std::vector<double>, std::vector<double>> Problem_ODE::getSolution() const {
+    return solution;
+}
+
+std::string Problem_ODE::getID() const {
+    return id;
+}
 /* --------------------------------------------------------------------------- */
