@@ -15,12 +15,20 @@
 
 ## How to compile
 ### Prerequisities
-`sudo apt install libgtest-dev`
+`sudo apt install doxygen` only for documentation
 
-`sudo apt install doxygen`
+### Compilation and execution
+```bash
+mkdir build && cd build
+cmake ..
+make
+./PSCS-ODE
+```
 
-### Compilation
-
+### Documentation
+``` bash
+firefox docs/html/index.html
+```
 
 ## Usage and program execution
 
