@@ -1,6 +1,4 @@
 #include "Solver/ForwardEulerSolver.h"
-#include <utility> // for std::pair
-#include <vector>
 
 std::pair<std::vector<double>, std::vector<double>> ForwardEulerSolver::solve() {
   std::vector<double> ys(this->n); // Vector to store y-values
@@ -8,7 +6,7 @@ std::pair<std::vector<double>, std::vector<double>> ForwardEulerSolver::solve() 
   double y = this->y0;
   double t = 0;
   DoubleFunction f = function.toDoubleFunction();
-  
+
   for (int i = 0; i < this->n; ++i) {
     ys[i] = y; // Store the current y-value
     ts[i] = t; // Store the current time

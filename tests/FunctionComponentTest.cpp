@@ -17,7 +17,7 @@ TEST_F(FunctionComponentTest, GenerateScalarComponent) {
     fc.generateScalarComponent(42.0);
 
     DoubleFunction f = fc.getFunction();
-    EXPECT_EQ(f(1.0, 2.0), 42.0);
+    EXPECT_EQ(f(2.0, 1.0), 42.0);
 }
 
 TEST_F(FunctionComponentTest, GenerateTermComponent) {
@@ -33,7 +33,7 @@ TEST_F(FunctionComponentTest, GenerateExpComponent) {
     fc.generateExpComponent(2.0);
 
     DoubleFunction f = fc.getFunction();
-    EXPECT_EQ(f(3.0, 2.0), 8.0); // 2^3 = 8
+    EXPECT_EQ(f(2.0, 3.0), 8.0); // 2^3 = 8
 }
 
 TEST_F(FunctionComponentTest, SumFunctionComponents) {
@@ -44,7 +44,7 @@ TEST_F(FunctionComponentTest, SumFunctionComponents) {
     FunctionComponent result = fc1.sum(fc2);
 
     DoubleFunction f = result.getFunction();
-    EXPECT_EQ(f(2.0, 7.0), 21.0); // 5 + (2^3 * 2) = 13
+    EXPECT_EQ(f(7.0, 2.0), 21.0); // 5 + (2^3 * 2) = 13
 }
 
 int main(int argc, char **argv) {

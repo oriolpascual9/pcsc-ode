@@ -9,15 +9,15 @@
 #include <utility>
 
 // Define a common test function and analytical solution
-double analyticalSolution(double t) { return std::exp(t); };
+double analyticalSolution(double t, double initialY) { return 1/(initialY-t); };
 
 // Base class for solver tests
 class SolverTestBase : public ::testing::Test {
 protected:
     const double initialTime = 0.0;
-    const double initialY = 1.0; // y(0) = 1
-    const double dt = 1e-5;
-    const int n = 10; // Number of steps
+    const double initialY = 1; // y(0) = 1
+    const double dt = 1e-8;
+    const int n = 1000000; // Number of steps
     Function function;
     FunctionComponent fc1;
 
@@ -28,9 +28,9 @@ protected:
         for (int i = 0; i < n; ++i) {
             double t = i * dt;
             times.push_back(t);
-            analyticalResults.push_back(analyticalSolution(t));
+            analyticalResults.push_back(analyticalSolution(t, initialY));
         }
-        fc1.generateTermComponent(1.0, 1.0);
+        fc1.generateTermComponent(1.0, 2.0);
         function.addComponent(fc1);
     }
 

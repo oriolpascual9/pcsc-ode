@@ -25,7 +25,7 @@ TEST_F(ReaderODETest, ChooseParseFunction_ValidInput) {
 
     DoubleFunction f = function.toDoubleFunction();
 
-    EXPECT_EQ(f(3, 100.0), 19); // 3*3^2 - 2^3
+    EXPECT_EQ(f(100.0, 3), 19); // 3*3^2 - 2^3
 }
 
 TEST_F(ReaderODETest, ChooseParseFunction_InvalidInput) {
@@ -45,7 +45,7 @@ TEST_F(ReaderODETest, ParseFunctionPoly_ValidInput) {
 
     // no exception should be thrown
     DoubleFunction f = function.toDoubleFunction();
-    EXPECT_EQ(f(2.0, 100.0), 12.0); // 3*2^2
+    EXPECT_EQ(f(100.0, 2.0), 12.0); // 3*2^2
 }
 
 TEST_F(ReaderODETest, ParseFunctionPoly_InvalidInput) {
@@ -65,7 +65,7 @@ TEST_F(ReaderODETest, ParseFunctionExp_ValidInput) {
 
     // no exception should be thrown
     DoubleFunction f = function.toDoubleFunction();
-    EXPECT_EQ(f(2.0, 100.0), 6.25); // 2.5^2
+    EXPECT_EQ(f(0.0, 2.0), 6.25); // 2.5^2
 }
 
 TEST_F(ReaderODETest, ParseFunctionExp_InvalidInput) {
@@ -90,7 +90,7 @@ TEST_F(ReaderODETest, ReadODEProblem_ValidInput) {
     EXPECT_EQ(problem.getN(), 10);
 
     DoubleFunction f = problem.getFunction().toDoubleFunction();
-    EXPECT_EQ(f(2.0, 100.0), 12.0); // 3*2^2
+    EXPECT_EQ(f(9092.0, 2.0), 12.0); // 3*2^2
 }
 
 TEST_F(ReaderODETest, ReadODEProblem_InvalidInput) {

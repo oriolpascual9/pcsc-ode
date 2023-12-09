@@ -1,5 +1,4 @@
 #include "Solver/AdamBashforthSolver.h"
-#include <utility> // for std::pair
 
 std::pair<std::vector<double>, std::vector<double>> AdamBashforthSolver::solve() {
   std::vector<double> ys(this->n, this->y0); // Initialize with size n and initial value y0

@@ -62,7 +62,7 @@ function.addComponent(fc4);
 
 DoubleFunction f = function.toDoubleFunction();
 
-EXPECT_EQ(f(2.0, 100.0), 27.0); // 5 + 2*2^3 - 10 + 4^2
+EXPECT_EQ(f(100.0, 2.0), 27.0); // 5 + 2*2^3 - 10 + 4^2
 
 }
 

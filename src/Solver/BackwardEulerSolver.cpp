@@ -1,6 +1,4 @@
 #include "Solver/BackwardEulerSolver.h"
-#include <utility> // for std::pair
-#include <vector>
 
 std::pair<std::vector<double>, std::vector<double>> BackwardEulerSolver::solve() {
   std::vector<double> ys(this->n);

@@ -1,6 +1,5 @@
 #include "Solver/RungeKuttaSolver.h"
-#include <utility> // for std::pair
-#include <vector>
+
 
 std::pair<std::vector<double>, std::vector<double>> RungeKuttaSolver::solve() {
   std::vector<double> ys(this->n); // Vector to store y-values
